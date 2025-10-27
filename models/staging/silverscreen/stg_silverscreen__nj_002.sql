@@ -11,7 +11,7 @@ monthly_cinema_nj002 as (
     select
         movie_id,
         date_trunc('month', date) as month,
-        'nj_002' as location,
+        'NJ_002' as location,
         sum(ticket_amount) as tickets_sold,
         sum(total_earned) as revenue
 
