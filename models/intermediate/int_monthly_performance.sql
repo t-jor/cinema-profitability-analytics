@@ -8,7 +8,7 @@ monthly_rental_cost as (
 
 monthly_revenue as (
 
-    select * from {{ ref('int_movie_revenues') }}
+    select * from {{ ref('int_monthly_revenues') }}
 
 ),
 

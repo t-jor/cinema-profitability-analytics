@@ -29,7 +29,7 @@
 ) }}
 
 {{ codegen.generate_model_yaml(
-    model_names=['int_movie_revenues']
+    model_names=['int_monthly_revenues']
 ) }}
 
 
