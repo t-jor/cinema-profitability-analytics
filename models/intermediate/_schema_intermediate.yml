@@ -55,6 +55,16 @@ models:
       Consolidates monthly sales data from all three Silverscreen cinema locations in New Jersey.
       UNION of stg_nj_001/002/003
     columns:
+      - name: monthly_revenues_key
+        data_type: varchar
+        description: |
+          Surrogate key for joining with stg_invoices to build int_monthly_performance.
+          Key created from movie_id, month and location as no unique PK exists.
+          Macro used: # dbt_utils.generate_surrogate_key(['movie_id', 'month', 'location']) # as monthly_revenues_key
+        tests:
+          - unique
+          - not_null    
+    
       - name: movie_id
         data_type: varchar
         description: "A unique identifier for each movie, typically consisting of the studio, year, and a unique movie code."

@@ -24,5 +24,12 @@ monthly_invoices as (
 
 )
 
-select * from monthly_invoices
---order by movie_id, month, location
+select
+    {{ dbt_utils.generate_surrogate_key(['movie_id', 'month', 'location']) }} as monthly_invoices_key,
+    movie_id,
+    month,
+    location,
+    rental_cost
+
+from monthly_invoices
+order by movie_id, month, location
