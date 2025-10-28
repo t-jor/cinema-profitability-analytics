@@ -18,7 +18,7 @@ monthly_performance as (
     COALESCE(cst.movie_id, rev.movie_id) as movie_id,
     COALESCE(cst.month, rev.month) as month,
     COALESCE(cst.location, rev.location) as location,
-    cst.rental_cost,
+    COALESCE(cst.rental_cost, 0) as rental_cost,
     rev.tickets_sold,
     rev.revenue
 
