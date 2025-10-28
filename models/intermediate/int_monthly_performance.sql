@@ -24,9 +24,7 @@ monthly_performance as (
 
     from monthly_rental_cost cst
     full join monthly_revenue rev
-    on cst.movie_id = rev.movie_id
-    and cst.month = rev.month
-    and cst.location = rev.location
+    on cst.monthly_invoices_key = rev.monthly_revenues_key
 
 )
 

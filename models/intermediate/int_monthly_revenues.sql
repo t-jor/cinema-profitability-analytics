@@ -28,5 +28,13 @@ monthly_cinema_sales AS (
 
 )
 
-select * from monthly_cinema_sales
+select 
+    {{ dbt_utils.generate_surrogate_key(['movie_id', 'month', 'location']) }} as monthly_revenues_key,
+    movie_id,
+    month,
+    location,
+    tickets_sold,
+    revenue
+
+from monthly_cinema_sales
 order by movie_id, month, location

@@ -10,6 +10,16 @@ models:
       - total_invoice_sum (rental_cost) usually represents 4 weeks, a full month, even if the release_date is during this current month
       - For the analysis all total_invoice_sum (rental_cost) have been considered (as the have specific invoice_ids)
     columns:
+      - name: monthly_invoices_key
+        data_type: varchar
+        description: |
+          Surrogate key for joining with int_monthly_revenues to build int_monthly_performance.
+          Key created from movie_id, month and location as no unique PK exists.
+          Macro used: # dbt_utils.generate_surrogate_key(['movie_id', 'month', 'location']) # as monthly_invoices_key
+        tests:
+          - unique
+          - not_null      
+      
       - name: movie_id
         data_type: varchar
         description: "A unique identifier for each movie, typically consisting of the studio, year, and a unique movie code."
