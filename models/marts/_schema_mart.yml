@@ -1,0 +1,88 @@
+version: 2
+
+models:
+  - name: mart_monthly_performance
+    description: |
+      Monthly cinema performance data from consolidated cinema sales and movie rental cost (int_monthly_performance).
+      Adds movie information as title, genre and studio as well as KPIs profit and ROI.
+    columns:
+      - name: movie_id
+        data_type: varchar
+        description: "A unique identifier for each movie, typically consisting of the studio, year, and a unique movie code."
+        tests:
+          - not_null
+
+      - name: movie_title
+        data_type: varchar
+        description: "The title of the movie."
+        tests:
+          - not_null
+
+      - name: genre
+        data_type: varchar
+        description: "The genre of the movie, describing the type of content. Missing information has been replaced by 'Unknown'."
+        tests:
+          - not_null
+
+      - name: studio
+        data_type: varchar
+        description: "The production studio responsible for making the movie."
+        tests:
+          - not_null
+
+      - name: month
+        data_type: date
+        description: "The month of sales/cost/profit and ROI delivery."
+        tests:
+          - not_null
+
+      - name: location
+        data_type: varchar
+        description: "The identifier of the cinema location, where the movie was shown and sales/costs/profit generated."
+        tests:
+          - not_null
+
+      - name: rental_cost
+        data_type: number
+        description: "The cost for renting the movie to a specific cinema location, taken from invoice totals."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+      - name: tickets_sold
+        data_type: number
+        description: "The total number of tickets purchased for a certain movie, month and location."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+      - name: revenue
+        data_type: number
+        description: "The total sales (=number of tickets purchased * price) for a certain movie, month and location."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+        
+      - name: profit
+        data_type: number
+        description: |
+          The profit or loss from showing a certain movie, per month and location.
+          In this case it only considers revenue from ticket sales and rental cost for the movies.
+          >>> profit = revenue - rental_cost
+        tests:
+          - not_null
+
+      - name: roi
+        data_type: number
+        description: |
+          The ROI from showing a certain movie, per month and location.
+          In this case it only considers revenue from ticket sales and rental cost for the movies.
+          >>> ROI = profit / rental_cost
+        tests:
+          - not_null

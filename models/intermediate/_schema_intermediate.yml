@@ -1,0 +1,92 @@
+version: 2
+
+models:
+  - name: int_monthly_performance
+    description: |
+      Consolidates cinema sales data (int_movie_revenues) with movie rental costs (stg_invoice).
+      Performs a FULL JOIN to include movies with sales but without rental costs.
+    columns:
+      - name: movie_id
+        data_type: varchar
+        description: "A unique identifier for each movie, typically consisting of the studio, year, and a unique movie code."
+        tests:
+          - not_null
+
+      - name: month
+        data_type: date
+        description: "The month the sales and associated rental costs occurred."
+        tests:
+          - not_null
+
+      - name: location
+        data_type: varchar
+        description: "The identifier of the cinema location, where the movie was shown and the sales/ rental costs generated."
+        tests:
+          - not_null
+          
+      - name: rental_cost
+        data_type: number
+        description: "The cost for renting the movie to a specific cinema location, taken from invoice totals."
+        tests:
+          - not_null
+
+      - name: tickets_sold
+        data_type: number
+        description: "The total number of tickets purchased for a certain movie, month and location."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+      - name: revenue
+        data_type: number
+        description: "The total sales (=number of tickets purchased * price) for a certain movie, month and location."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+
+
+  - name: int_movie_revenues
+    description: |
+      Consolidates monthly sales data from all three Silverscreen cinema locations in New Jersey.
+      UNION of stg_nj_001/002/003
+    columns:
+      - name: movie_id
+        data_type: varchar
+        description: "A unique identifier for each movie, typically consisting of the studio, year, and a unique movie code."
+        tests:
+          - not_null
+
+      - name: month
+        data_type: date
+        description: "The month the sales occurred."
+        tests:
+          - not_null
+
+      - name: location
+        data_type: varchar
+        description: "The identifier of the cinema location, where the movie was shown and the sales generated."
+        tests:
+          - not_null
+
+      - name: tickets_sold
+        data_type: number
+        description: "The total number of tickets purchased for a certain movie, month and location."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+
+      - name: revenue
+        data_type: number
+        description: "The total sales (=number of tickets purchased * price) for a certain movie, month and location."
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
