@@ -18,13 +18,13 @@ models:
 
       - name: month
         data_type: date
-        description: "The month in which the invoice was issued, in the format YYYY-MM-DD."
+        description: "The month in which the invoice was issued, in the format YYYY-MM-01 - first day of the month."
         tests:
           - not_null
 
       - name: location
         data_type: varchar
-        description: "The identifier of the movie theater location, which is where the movie was shown. Renamed from 'location_id'"
+        description: "The identifier of the cinema location, which is where the movie was shown. Renamed from 'location_id'"
         tests:
           - not_null
 
@@ -82,7 +82,7 @@ models:
       - name: month
         data_type: date
         description: |
-          The date the transaction occurred, formatted as YYYY-MM-DD. 
+          The date the transaction occurred, formatted as YYYY-MM-01 - first day of the month. 
           Renamed from 'timestamp'.
           Aggregated to monthly.
         tests:
@@ -99,18 +99,14 @@ models:
         description: "The number of tickets purchased in this particular transaction. Reneamed from 'sum(ticket_amount)'."
         tests:
           - not_null
-          - dbt_utils.accepted_range:
-              arguments:
-                min_value: 0
+          - no_negative_values
 
       - name: revenue
         data_type: number
         description: "The total amount of money spent in the transaction, calculated as ticket_amount * price. Renamed from 'sum(transaction_total)'."
         tests:
           - not_null  
-          - dbt_utils.accepted_range:
-              arguments:
-                min_value: 0
+          - no_negative_values
 
 
   - name: stg_nj_002
@@ -127,7 +123,7 @@ models:
       - name: month
         data_type: date
         description: |
-          The date of the ticket sales transaction, formatted as YYYY-MM-DD. This represents the day for which ticket sales are recorded.
+          The date of the ticket sales transaction, formatted as YYYY-MM-01 - first day of the month.
           Renamed from 'date'.
           Aggregated to monthly.
         tests:
@@ -144,9 +140,7 @@ models:
         description: "The number of tickets sold on the given day. Renamed from 'sum(ticket_amount)'."
         tests:
           - not_null
-          - dbt_utils.accepted_range:
-              arguments:
-                min_value: 0
+          - no_negative_values
 
       - name: revenue
         data_type: number
@@ -155,9 +149,7 @@ models:
           Renamed from 'sum(total_earned)'.
         tests:
           - not_null
-          - dbt_utils.accepted_range:
-              arguments:
-                min_value: 0
+          - no_negative_values
   
 
 
@@ -177,7 +169,7 @@ models:
       - name: month
         data_type: date
         description: | 
-          The date when the transaction occurred, formatted as YYYY-MM-DD.
+          The date when the transaction occurred, formatted as YYYY-MM-01 - first day of the month.
           Renamed from 'timestamp'.
           Aggregated to monthly.
         tests:
@@ -194,15 +186,11 @@ models:
         description: "The quantity of the product purchased in the transaction. Renamed from 'sum(amount)', where product_type = 'ticket'."
         tests:
           - not_null
-          - dbt_utils.accepted_range:
-              arguments:
-                min_value: 0
+          - no_negative_values
 
       - name: revenue
         data_type: number
         description: "The total amount spent in the transaction, calculated as amount * price. Renamed from 'sum(total_value)'."
         tests:
           - not_null
-          - dbt_utils.accepted_range:
-              arguments:
-                min_value: 0
+          - no_negative_values
