@@ -2,13 +2,13 @@ with
 
 monthly_rental_cost as (
 
-    select * from {{ ref('stg_silverscreen__invoices') }}
+    select * from {{ ref('stg_invoices') }}
 
 ),
 
 monthly_revenue as (
 
-    select * from {{ ref('int_silverscreen__movie_revenues') }}
+    select * from {{ ref('int_movie_revenues') }}
 
 ),
 

@@ -1,12 +1,12 @@
 with 
 
-import_cinema_nj003 as (
+import_sales_nj003 as (
 
     select * from {{ source('silverscreen', 'nj_003') }}
 
 ),
 
-monthly_cinema_nj003 as (
+monthly_sales_nj003 as (
 
     select
         details as movie_id,
@@ -19,11 +19,11 @@ monthly_cinema_nj003 as (
         --product_type,
         --price
         
-    from import_cinema_nj003
+    from import_sales_nj003
     where product_type = 'ticket'
     group by movie_id, month, location
 
 )
 
-select * from monthly_cinema_nj003
+select * from monthly_sales_nj003
 order by movie_id, month

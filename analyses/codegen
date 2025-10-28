@@ -1,0 +1,44 @@
+--step1: generate schema.yml for staging-models:
+
+{{ codegen.generate_model_yaml(
+    model_names=['stg_silverscreen__invoices']
+) }}
+
+{{ codegen.generate_model_yaml(
+    model_names=['stg_silverscreen__movie_catalogue']
+) }}
+
+{{ codegen.generate_model_yaml(
+    model_names=['stg_silverscreen__nj_001']
+) }}
+
+{{ codegen.generate_model_yaml(
+    model_names=['stg_silverscreen__nj_002']
+) }}
+
+{{ codegen.generate_model_yaml(
+    model_names=['stg_silverscreen__nj_003']
+) }}
+
+
+
+--step4: schema.yml mit Beschreibungen für int-Modelle generieren:
+
+{{ codegen.generate_model_yaml(
+    model_names=['int_marketing_attribution']
+) }}
+
+{{ codegen.generate_model_yaml(
+    model_names=['int_users_with_attribution']
+) }}
+
+{{ codegen.generate_model_yaml(
+    model_names=['int_user_ltv']
+) }}
+
+
+--step5: schema.yml mit Beschreibungen für roi-Modell generieren lassen:
+
+{{ codegen.generate_model_yaml(
+    model_names=['user_roi']
+) }}
