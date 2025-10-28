@@ -50,7 +50,7 @@ models:
 
 
 
-  - name: int_movie_revenues
+  - name: int_monthly_revenues
     description: |
       Consolidates monthly sales data from all three Silverscreen cinema locations in New Jersey.
       UNION of stg_nj_001/002/003
