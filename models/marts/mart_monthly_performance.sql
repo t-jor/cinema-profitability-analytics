@@ -29,6 +29,7 @@ monthly_performance_final as (
 
     from monthly_movie_performance perf
     left join movie_information info
+    on perf.movie_id = info.movie_id
 
 )
 
