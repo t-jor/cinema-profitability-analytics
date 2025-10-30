@@ -170,9 +170,30 @@ This builds all models in dependency order, runs tests, applies the production s
 
 ## 📊 Example Visualization  
 
-A small Tableau dashboard visualizes monthly revenues, rental costs, and ROI by cinema location.
+A Tableau dashboard visualizes monthly revenues, rental costs, and ROI across all cinema locations.
+
+[🔗 View on Tableau Public](https://public.tableau.com/views/Silverscreen_Dashboard/Overview?:language=de-DE&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+**Key insights from the analysis:**
+- All three cinemas operate at a loss — primarily due to uniform rental costs that exceed revenues.
+- **Location NJ003** performs *relatively best*:  
+  - 50.6% of all tickets sold, 46.1% of total revenue, but only 28.4% of total losses.  
+  - Lowest average ticket price ($11.5), suggesting better volume efficiency.
+- **Location NJ002** is the weakest performer:  
+  - 21.5% of tickets sold, 22.9% of revenue, but 37% of total losses.  
 
 ![Tableau Summary](assets/Silverscreen_tableau_dashboard.png)
+
+---
+
+## 🧊 Data Warehouse View  
+
+The final models are deployed in **Snowflake**, organized by dbt environment layers:
+
+![Snowflake Explorer](assets/Silverscreen_Snowflake.png)
+
+This structure mirrors the dbt model hierarchy (`staging → intermediate → marts`)  
+and ensures full lineage and environment separation.
 
 ---
 
