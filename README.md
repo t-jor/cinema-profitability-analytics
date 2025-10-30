@@ -143,12 +143,7 @@ All models are organized into environment-specific schemas controlled by a custo
 
 ### Job execution
 
-The production job runs:
-
-```bash
-dbt build --target prod
-```
-
+Go to **Orchestration → Jobs**, select the **Prod_SilverScreen** job and click **Run now**.
 This builds all models in dependency order, runs tests, applies the production schema naming logic from the custom macro, and generates documentation.
 
 ---
@@ -177,7 +172,7 @@ This builds all models in dependency order, runs tests, applies the production s
 
 A small Tableau dashboard visualizes monthly revenues, rental costs, and ROI by cinema location.
 
-![Tableau Summary](assets/Silverschreen_tableau_dashboard.png)
+![Tableau Summary](assets/Silverscreen_tableau_dashboard.png)
 
 ---
 
