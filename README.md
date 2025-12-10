@@ -1,7 +1,7 @@
-# 🎬 Silverscreen Project  
+# Cinema Profitability Modeling & Performance Analysis (Silverscreen Case Study)
 
 **Evaluating the business impact of a cinema chain acquisition**  
-*A dbt Cloud project modeling profitability metrics in Snowflake*
+*A modular dbt Cloud pipeline running on Snowflake to model revenues, costs, and monthly profitability.*
 
 ---
 
