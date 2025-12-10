@@ -200,4 +200,4 @@ and ensures full lineage and environment separation.
 ## 👨‍💻 Author  
 
 **Thomas Jortzig**  
-Silverscreen Project | October 2025
+Cinema Profitability Modeling & Performance Analysis – Silverscreen Case Study (10/2025)
